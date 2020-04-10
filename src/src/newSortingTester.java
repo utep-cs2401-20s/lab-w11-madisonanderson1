@@ -29,5 +29,32 @@ public class newSortingTester extends newSorting{
         // for one pass but I got it to work
     }
 
+    @Test
+    public void testNewSorting3(){//first test using both quick sort and splitting/merging this is just an inital test to make sure it works
+        int[] test = {1,3,4,2}; // get an idea about where I must go from their and fix any problems
+        int[] expected = {1,2,3,4};
+        newSorting ns = new newSorting();
+        ns.newSort(test,2); // want to start off with small array and small size to see if it will work
+        assertArrayEquals(expected, test);
+        //Luckily this test worked on first try
+    }
+
+    @Test
+    public void testNewSorting4(){ // I wanted to text this sorting method with a larger array to see if the length would affect the results
+        int[] test = {2,3,5,6,7,1,8,9};//larger array
+        int[] expected = {1,2,3,5,6,7,8,9};
+        newSorting ns = new newSorting();
+        ns.newSort(test,2);
+        assertArrayEquals(expected, test); //array passed on first try
+    }
+
+    @Test
+    public void testNewSorting5(){// now I want to test the previous tested array but with a different size passed in the newSorting method to see if this will change anything
+        int[] test = {2,3,5,6,7,1,8,9};// which it shouldn't affect the result just how the result has gotten there
+        int[] expected = {1,2,3,5,6,7,8,9};
+        newSorting ns = new newSorting();
+        ns.newSort(test,4);
+        assertArrayEquals(expected, test); //passed on the first try
+    }
 
 }

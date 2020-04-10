@@ -1,3 +1,5 @@
+import java.rmi.dgc.VMID;
+
 public class newSorting {
 
     public void newSort(int[] array, int size) {
@@ -15,9 +17,11 @@ public class newSorting {
             for (int i = 0; i < array.length - mid; i++) {
                 right[i] = array[mid + i];
             }
+            //use new sort on both new arrays from original array
             newSort(left, size);
             newSort(right, size);
-            //merge halves
+            //merge the array in order
+            mergeSortedHalves(array, left, right);
 
         }
     }
@@ -30,13 +34,16 @@ public class newSorting {
         }
     }
     public int partition(int[] array, int start, int last) {
+        //GOAL have an array = {(#s less than)(pivot)(#s greater than)}
         int pivot = array[start];
         int more = last;
         int less = start;
         while (less < more) {
+            //go through the left side until reaches a number greater than the pivot
             while (less <= last && array[less] <= pivot) {
                 less++;
             }
+            //go through the right side until reaches a number less than the pivot
             while (more >= start && array[more] > pivot) {
                 more--;
             }
@@ -50,6 +57,29 @@ public class newSorting {
         array[start] = array[more];
         array[more] = temp;
         return start+1;
+    }
+
+    public void mergeSortedHalves(int[] a, int[] left, int[] right){
+        int l = a.length / 2;
+        int r = a.length - l;
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        while (i<l && j < r){
+            //move values in correct order
+            if (left[i] <= right[j]){
+                a[k++] = left[i++];
+            } else{
+                a[k++] = right[j++];
+            }
+        }
+        //add remaining elements
+        while(i < l){
+            a[k++] = left[i++];
+        }
+        while (j < r){
+            a[k++] = right[j++];
+        }
     }
 
 }
