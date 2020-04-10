@@ -3,7 +3,7 @@ public class newSorting {
     public void newSort(int[] array, int size) {
         //base case
         if (array.length <= size) {
-            //quicksort
+            quickSort(array, 0,array.length-1);
         } else {
             int mid = array.length / 2; //find mid-point of array
             int[] left = new int[mid];
@@ -29,7 +29,6 @@ public class newSorting {
             quickSort(array, part + 1, last);
         }
     }
-
     public int partition(int[] array, int start, int last) {
         int pivot = array[start];
         int more = last;
@@ -39,19 +38,18 @@ public class newSorting {
                 less++;
             }
             while (more >= start && array[more] > pivot) {
-                more++;
+                more--;
             }
-            if (less < more) {
+            if (less < more && less<=last) {
                 int temp = array[start];
-                array[less] = array[more];
+                array[start] = array[more];
                 array[more] = temp;
             }
         }
-        int temp = array[start - 1];
-        array[start - 1] = array[more];
+        int temp = array[start];
+        array[start] = array[more];
         array[more] = temp;
-
-        return start-1;
+        return start+1;
     }
 
 }
